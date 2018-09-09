@@ -1,0 +1,30 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+	<f:section title="NS Auto Config">
+
+		<f:entry title="${%apiUrl}" field="apiUrl">
+			<f:textbox />
+		</f:entry>
+
+		<f:entry title="${%group}" field="group">
+			<f:textbox />
+		</f:entry>
+
+		<f:entry title="${%apiKey}" field="apiKey">
+			<f:password />
+			<f:validateButton title="${%Test NS API Key}"
+				progress="${%Validating API Key}" method="testApiKey" with="apiKey" />
+		</f:entry>
+
+		<f:entry title="${%binaryName}" field="binaryName">
+			<f:textbox />
+		</f:entry>
+
+		<f:entry title="${%Description}" field="description">
+			<f:textbox />
+		</f:entry>
+	</f:section>
+
+</j:jelly>
