@@ -17,5 +17,21 @@ mvn findbugs:gui
 mvn clean install
 cp target/NSAutoJenkins.hpi ~/.jenkins/plugins/
 ```
-
 Then redeploy Jenkins.
+
+## Create Mobile build
+![New Build](http://images/jenkins1.png)
+
+
+## Adding Plugin to your mobile build
+Select Configure option from Jenkins console, then select dropdown of build step and choose NS Auto Jenkins Plugin, e.g.
+
+![Build Step](http://images/jenkins2.png)
+
+## Specify configuration parameters
+![Configure Step](http://images/jenkins3.png)
+
+
+## Kick off your build and then see results
+![Build Results](http://images/jenkins4.png)
+
