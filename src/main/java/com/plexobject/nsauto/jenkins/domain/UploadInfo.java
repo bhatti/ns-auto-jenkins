@@ -1,10 +1,10 @@
-package com.plexobject.nsauto.jenkins.plugin;
+package com.plexobject.nsauto.jenkins.domain;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class ReportInfo {
+public class UploadInfo {
     private String application;
     private String group;
     private String account;
@@ -15,23 +15,30 @@ public class ReportInfo {
     private String creator;
     private String created;
 
-    public ReportInfo() {
+    public UploadInfo() {
 
     }
 
-    public static ReportInfo fromJson(String json) throws ParseException {
+    public static UploadInfo fromJson(String json) throws ParseException {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject) parser.parse(json);
-        ReportInfo reportInfo = new ReportInfo();
-        reportInfo.setApplication((String) jsonObject.get("application"));
-        reportInfo.setGroup((String) jsonObject.get("group"));
-        reportInfo.setAccount((String) jsonObject.get("account"));
-        reportInfo.setPlatform((String) jsonObject.get("platform"));
-        reportInfo.setPackageId((String) jsonObject.get("package"));
-        reportInfo.setTask((Long) jsonObject.get("task"));
-        reportInfo.setCreator((String) jsonObject.get("creator"));
-        reportInfo.setCreated((String) jsonObject.get("created"));
-        return reportInfo;
+        // for error message
+        String name = (String) jsonObject.get("name");
+        String message = (String) jsonObject.get("message");
+        if (name != null && message != null) {
+            throw new RuntimeException(name + " " + message);
+        }
+        //
+        UploadInfo uploadInfo = new UploadInfo();
+        uploadInfo.setApplication((String) jsonObject.get("application"));
+        uploadInfo.setGroup((String) jsonObject.get("group"));
+        uploadInfo.setAccount((String) jsonObject.get("account"));
+        uploadInfo.setPlatform((String) jsonObject.get("platform"));
+        uploadInfo.setPackageId((String) jsonObject.get("package"));
+        uploadInfo.setTask(((Number) jsonObject.get("task")).longValue());
+        uploadInfo.setCreator((String) jsonObject.get("creator"));
+        uploadInfo.setCreated((String) jsonObject.get("created"));
+        return uploadInfo;
 
     }
 

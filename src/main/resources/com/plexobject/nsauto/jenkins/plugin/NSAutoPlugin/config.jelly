@@ -3,15 +3,6 @@
 	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
 	<f:section title="NS Auto Config">
-
-		<f:entry title="${%apiUrl}" field="apiUrl">
-			<f:textbox />
-		</f:entry>
-
-		<f:entry title="${%group}" field="group">
-			<f:textbox />
-		</f:entry>
-
 		<f:entry title="${%apiKey}" field="apiKey">
 			<f:password />
 			<f:validateButton title="${%Test NS API Key}"
@@ -22,9 +13,72 @@
 			<f:textbox />
 		</f:entry>
 
-		<f:entry title="${%Description}" field="description">
-			<f:textbox />
-		</f:entry>
+		<f:advanced>
+			<f:entry title="${%description}" field="description">
+				<f:textbox />
+			</f:entry>
+
+			<f:entry title="${%apiUrl}" field="apiUrl">
+				<f:textbox />
+			</f:entry>
+
+			<f:entry title="${%group}" field="group">
+				<f:textbox />
+			</f:entry>
+
+			<f:entry title="${%waitForResults}" field="waitForResults">
+				<f:checkbox />
+			</f:entry>
+
+			<f:entry title="${%waitMinutes}" field="waitMinutes">
+				<select name="waitMinutes">
+					<option value="5"
+						selected="${instance.waitMinutes.equals(5)? 'true':null}">5 Minutes</option>
+					<option value="10"
+						selected="${instance.waitMinutes.equals(10)? 'true':null}">10 Minutes</option>
+					<option value="15"
+						selected="${instance.waitMinutes.equals(15)? 'true':null}">15 Minutes</option>
+					<option value="20"
+						selected="${instance.waitMinutes.equals(20)? 'true':null}">20 Minutes</option>
+					<option value="25"
+						selected="${instance.waitMinutes.equals(25)? 'true':null}">25 Minutes</option>
+					<option value="30"
+						selected="${instance.waitMinutes.equals(30)? 'true':null}">30 Minutes</option>
+					<option value="60"
+						selected="${instance.waitMinutes.equals(60)? 'true':null}">1 Hour</option>
+				</select>
+			</f:entry>
+
+			<f:entry title="${%breakBuildOnCVSS}" field="breakBuildOnCVSS">
+				<f:checkbox />
+			</f:entry>
+
+			<f:entry title="${%cvssScoreThreshold}" field="cvssScoreThreshold">
+				<select name="cvssScoreThreshold">
+					<option value="1"
+						selected="${instance.cvssScoreThreshold.equals(1)? 'true':null}">1</option>
+					<option value="2"
+						selected="${instance.cvssScoreThreshold.equals(2)? 'true':null}">2</option>
+					<option value="3"
+						selected="${instance.cvssScoreThreshold.equals(2)? 'true':null}">3</option>
+					<option value="4"
+						selected="${instance.cvssScoreThreshold.equals(4)? 'true':null}">4</option>
+					<option value="5"
+						selected="${instance.cvssScoreThreshold.equals(5)? 'true':null}">5</option>
+					<option value="6"
+						selected="${instance.cvssScoreThreshold.equals(6)? 'true':null}">6</option>
+					<option value="7"
+						selected="${instance.cvssScoreThreshold.equals(7)? 'true':null}">7</option>
+					<option value="8"
+						selected="${instance.cvssScoreThreshold.equals(8)? 'true':null}">8</option>
+					<option value="9"
+						selected="${instance.cvssScoreThreshold.equals(9)? 'true':null}">9</option>
+					<option value="10"
+						selected="${instance.cvssScoreThreshold.equals(10)? 'true':null}">10</option>
+				</select>
+			</f:entry>
+
+		</f:advanced>
 	</f:section>
 
 </j:jelly>

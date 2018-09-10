@@ -1,10 +1,13 @@
-package com.plexobject.nsauto.jenkins.plugin;
+package com.plexobject.nsauto.jenkins.utils;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -17,6 +20,7 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 
 public class IOHelper {
+    private static final String GET = "GET";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String AUTHORIZATION = "Authorization";
     private static final String POST = "POST";
@@ -47,6 +51,13 @@ public class IOHelper {
         return null;
     }
 
+    public static void save(String path, String contents) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8))) {
+            writer.write(contents);
+        }
+    }
+
     public static byte[] load(InputStream in) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         int nRead;
@@ -56,6 +67,22 @@ public class IOHelper {
         }
         buffer.flush();
         return buffer.toByteArray();
+    }
+
+    public static String get(String uri, String apiKey) throws IOException {
+        URL url = new URL(uri);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod(GET);
+        con.setRequestProperty(CONTENT_TYPE, "application/json");
+        con.setRequestProperty(AUTHORIZATION, "Bearer " + apiKey);
+        con.setConnectTimeout(TIMEOUT);
+        con.setReadTimeout(TIMEOUT);
+        con.setInstanceFollowRedirects(false);
+        InputStream in = con.getInputStream();
+        String json = new String(load(in), StandardCharsets.UTF_8);
+        in.close();
+        con.disconnect();
+        return json;
     }
 
     public static String upload(String uri, String apiKey, String file) throws IOException {
