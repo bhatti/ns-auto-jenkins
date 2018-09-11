@@ -8,6 +8,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.yaml.snakeyaml.Yaml;
 
+/**
+ * ReportInfo encapsulates JSON response from raw analysis report
+ * 
+ * @author sbhatti
+ *
+ */
 public class ReportInfo {
     private String kind;
     private String key;

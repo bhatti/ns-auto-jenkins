@@ -4,6 +4,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * UploadInfo encapsulates meta-data when mobile binary is uploaded
+ * 
+ * @author sbhatti
+ *
+ */
 public class UploadInfo {
     private String application;
     private String group;
@@ -38,6 +44,13 @@ public class UploadInfo {
         uploadInfo.setTask(((Number) jsonObject.get("task")).longValue());
         uploadInfo.setCreator((String) jsonObject.get("creator"));
         uploadInfo.setCreated((String) jsonObject.get("created"));
+
+        if (uploadInfo.getPackageId() == null || uploadInfo.getPackageId().length() == 0) {
+            throw new IllegalStateException("Package-id not found in JSON");
+        }
+        if (uploadInfo.getTask() == 0) {
+            throw new IllegalStateException("Task not found in JSON");
+        }
         return uploadInfo;
 
     }

@@ -1,15 +1,14 @@
 package com.plexobject.nsauto.jenkins.utils;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.plexobject.nsauto.jenkins.utils.IOHelper;
-
 public class IOHelperTest {
     private static final String GROUP = "aaaa";
-    private static final String API = "eyJhbGciOi";
+    private static final String API = "eyJhbG2";
     private static final String file = "apkpure_app_887.apk";
 
     // @Test
@@ -19,11 +18,23 @@ public class IOHelperTest {
     }
 
     // @Test
-    public void testGet() throws Exception {
+    public void testGetResults() throws Exception {
         String json = IOHelper.get("https://lab-api.nowsecure.com/app/android/pkg/assessment/task/results", API);
         Assert.assertNotNull(json);
     }
 
+    // @Test
+    public void testGetScore() throws Exception {
+        String json = IOHelper.get("https://lab-api.nowsecure.com/assessment/task/summary", API);
+        Assert.assertNotNull(json);
+    }
+    
+    @Test(expected=IOException.class)
+    public void testGetUsage() throws Exception {
+        String json = IOHelper.get("https://lab-api.nowsecure.com/resource/usage", API);
+        Assert.assertNotNull(json);
+    }
+    
     @Test
     public void testFind() throws Exception {
         new File("/tmp/test.out").createNewFile();

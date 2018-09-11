@@ -49,33 +49,12 @@
 				</select>
 			</f:entry>
 
-			<f:entry title="${%breakBuildOnCVSS}" field="breakBuildOnCVSS">
+			<f:entry title="${%breakBuildOnScore}" field="breakBuildOnScore">
 				<f:checkbox />
 			</f:entry>
 
-			<f:entry title="${%cvssScoreThreshold}" field="cvssScoreThreshold">
-				<select name="cvssScoreThreshold">
-					<option value="1"
-						selected="${instance.cvssScoreThreshold.equals(1)? 'true':null}">1</option>
-					<option value="2"
-						selected="${instance.cvssScoreThreshold.equals(2)? 'true':null}">2</option>
-					<option value="3"
-						selected="${instance.cvssScoreThreshold.equals(2)? 'true':null}">3</option>
-					<option value="4"
-						selected="${instance.cvssScoreThreshold.equals(4)? 'true':null}">4</option>
-					<option value="5"
-						selected="${instance.cvssScoreThreshold.equals(5)? 'true':null}">5</option>
-					<option value="6"
-						selected="${instance.cvssScoreThreshold.equals(6)? 'true':null}">6</option>
-					<option value="7"
-						selected="${instance.cvssScoreThreshold.equals(7)? 'true':null}">7</option>
-					<option value="8"
-						selected="${instance.cvssScoreThreshold.equals(8)? 'true':null}">8</option>
-					<option value="9"
-						selected="${instance.cvssScoreThreshold.equals(9)? 'true':null}">9</option>
-					<option value="10"
-						selected="${instance.cvssScoreThreshold.equals(10)? 'true':null}">10</option>
-				</select>
+			<f:entry title="${%scoreThreshold}" field="scoreThreshold">
+				<f:textbox />
 			</f:entry>
 
 		</f:advanced>

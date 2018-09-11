@@ -54,7 +54,7 @@ public class IOHelper {
     public static void save(String path, String contents) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(path), StandardCharsets.UTF_8))) {
-            writer.write(contents);
+            writer.write(contents.trim());
         }
     }
 
@@ -82,7 +82,7 @@ public class IOHelper {
         String json = new String(load(in), StandardCharsets.UTF_8);
         in.close();
         con.disconnect();
-        return json;
+        return json.trim();
     }
 
     public static String upload(String uri, String apiKey, String file) throws IOException {
